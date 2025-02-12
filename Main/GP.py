@@ -684,7 +684,7 @@ def run_pipeline(args):
 
         presence.to_csv(presence_file, sep='\t')
 
-    if 'All' in processes:
+    if 'All' in processes and Go=='y':
         print("\n----- Plotting Heatmap ------\n")
         ct = os.path.join(
             target_dir, f"{input_file_base_name}snv_CloneFinder.nwk")
