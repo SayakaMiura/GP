@@ -461,8 +461,8 @@ def run_pipeline(args):
             print("Matched positions:")
             for position_key, matches in matched_positions.items():
                 print(f"{position_key}: {matches}")
-
-            run(
+            try: 
+              run(
                 target_dir,
                 csv_files_dir,
                 signature_files_dir,
@@ -476,8 +476,9 @@ def run_pipeline(args):
                 driver_mutations,
                 position_to_gene,
                 position_to_gene_name,
-            )
-
+              )
+            except Exception as e:     
+              print(f"Error making pie: {e}")  
         elif initial_args.driver_mutation_file is None:
             driver_file = create_no_driver_file(target_dir)
             mutation_counts = parse_csv_files(csv_files_dir)
@@ -853,6 +854,12 @@ def delete_folder(folder_path):
         shutil.rmtree(folder_path)
        # print(f"Folder '{folder_path}' and all its contents have been deleted successfully.")
     except Exception as e: pass
+def delete_file(file,target):
+    try:
+       Fls=glob.glob(file+'*'+target)
+       for file in Fls:       
+           os.remove(file)
+    except Exception as e: pass      
 #        print(f"Error deleting folder '{folder_path}': {e}")        
 if __name__ == "__main__":
     initial_args, remaining_argv = parse_initial_arguments()
@@ -866,21 +873,23 @@ if __name__ == "__main__":
     args.max_graphs_per_tree='50'
     DataID=args.input_file.split('\\')[-1].split('.')[0].split('\\')[-1]
     print (DataID)
-    OutDir=args.input_file+'_old'
-    try:
-        os.makedirs(OutDir, exist_ok=True)
+ #   OutDir=args.input_file+'_old'
+ #   try:
+ #       os.makedirs(OutDir, exist_ok=True)
         #print(f"Directory '{OutDir}' created successfully or already exists.")
-    except Exception as e:
-        print(f"Error creating directory '{OutDir}': {e}")
-    move_folder(args.target_dir+'\\'+DataID, OutDir)
-    move_folder(args.target_dir+'\\'+DataID+'_PSF-SAMPLE-PhyloSignare', OutDir)
-    move_folder(args.target_dir+'\\PathFinder_Results', OutDir)
-    move_folder(args.target_dir+'\\scratch', OutDir)
-    move_files(args.target_dir+'\\', '.png', OutDir)
-    move_files(args.target_dir+'\\'+DataID, '', OutDir)    
-    move_files(args.target_dir+'\\Phylogenetic_Tree', '', OutDir)  
-    move_files(args.target_dir+'\\processed_clone_presence.txt', '', OutDir)  
-    delete_folder(OutDir)
+ #   except Exception as e:
+ #       print(f"Error creating directory '{OutDir}': {e}")
+    delete_folder(args.target_dir+'\\'+DataID)
+    delete_folder(args.target_dir+'\\'+DataID+'_PSF-SAMPLE-PhyloSignare')
+    delete_folder(args.target_dir+'\\PathFinder_Results')
+    delete_folder(args.target_dir+'\\scratch')
+    delete_file(args.target_dir+'\\', '.png')
+    delete_file(args.target_dir+'\\'+DataID, '')    
+    delete_file(args.target_dir+'\\Phylogenetic_Tree', '')  
+    delete_file(args.target_dir+'\\processed_clone_presence.txt', '')  
+
+
+    
     Command= run_pipeline(args)
 
     print ('collect output files')
@@ -905,7 +914,7 @@ if __name__ == "__main__":
     OutF.write('\n'.join(Command))
     OutF.close()
   #  print ('collect output files')
-    move_folder(args.target_dir+'\\'+DataID+'_PSF-SAMPLE-PhyloSignare', OutDir1+'\\PhyloSignare')   
+    move_folder(args.target_dir+'\\'+DataID+'_PSF-SAMPLE-PhyloSignare', OutDir1+'\\'+DataID+'_PhyloSignare')   
     move_files(OutDir+'\\'+DataID+'_clonevpresence.png', '', OutDir1+'\\'+DataID+'_CloneTree.png')   
     move_files(OutDir+'\\Phylo_bar_final.png', '', OutDir1+'\\'+DataID+'_Mutation.png')    
     move_files(OutDir+'\\'+DataID+'snv_PathFinder_processed_migration.png', '', OutDir1+'\\'+DataID+'_Metastasis.png')    
