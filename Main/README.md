@@ -1,5 +1,9 @@
 **Setup the software**
 
+_Download the whole folder of GP that contains Main and Input folders_
+
+Make sure you know where you can find GP.py in the Main folder in your PC. This GP.py file location in your PC is [path to GP.py], e.g., C:\Users\LabCompu\Desktop\GP-main\GP-main\Main.
+
 _Install Miniconda_
 
 https://docs.anaconda.com/miniconda/
