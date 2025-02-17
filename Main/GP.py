@@ -356,7 +356,7 @@ def run_pipeline(args):
         signature_files_dir = None
 
         phylosignare_dirs = glob.glob(
-            os.path.join(target_dir, "*-PhyloSignare"))
+            os.path.join(target_dir, input_file_base_name+"_PSF-SAMPLE-PhyloSignare"))
 
         for dir_path in phylosignare_dirs:
             potential_file = os.path.join(dir_path, "PhyloSignare.txt")
