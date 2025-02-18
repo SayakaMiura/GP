@@ -43,10 +43,10 @@ def clone_tree(presence, tree_file,clone_path):
                 i += 1
 
     ts = TreeStyle()
-    ts.show_scale = False
+    ts.show_scale = True
     ts.show_leaf_name = True
-    ts.show_branch_length = True
-    ts.show_branch_support = True
+    ts.show_branch_length = False
+    ts.show_branch_support = False
     
     tree.render(clone_path, tree_style=ts)
 
