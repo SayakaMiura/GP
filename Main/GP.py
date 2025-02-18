@@ -670,7 +670,7 @@ def run_pipeline(args):
 
     # ---------- Heatmap ----------
     Go='n'    
-    if 'CloneFinder' in processes and 'Picante_all' in processes or 'Picante_comdist' in processes or 'Picante_comdistnt' in processes or 'Picante_Unifrac' in processes and Go=='y':
+    if 'All' in processes or 'CloneFinder' in processes and 'Picante_all' in processes or 'Picante_comdist' in processes or 'Picante_comdistnt' in processes or 'Picante_Unifrac' in processes:
         input_file_base_name = os.path.splitext(
             os.path.basename(args.input_file))[0]
         ct = os.path.join(
@@ -739,8 +739,8 @@ def run_pipeline(args):
         target_dir, f"{input_file_base_name}_clonevpresence.png")
     tumor_path = os.path.join(
         target_dir, f"{input_file_base_name}_treevpresence.png")
-    if 'All' in processes and Go=='y':
-        print("\n----- Plotting Heatmap ------\n")
+    if 'All' in processes :
+        print("\n----- Plotting Tree ------\n")
         tt = os.path.join(
             target_dir, f"{input_file_base_name}_comdistnt_newick.txt")
 
@@ -748,8 +748,8 @@ def run_pipeline(args):
         tumor_tree(presence_file, tt, tumor_path)
         print("Clone, Tumor Phylo Tree vs Presence Matrix Plotted Successfully...")
 
-    if "CloneFinder" in processes and 'Picante_all' in processes and Go=='y':
-        print("\n----- Plotting Heatmap ------\n")
+    if "CloneFinder" in processes and 'Picante_all' in processes:
+        print("\n----- Plotting Tree ------\n")
         tt = os.path.join(
             target_dir, f"{input_file_base_name}_comdistnt_newick.txt")
 
@@ -757,8 +757,8 @@ def run_pipeline(args):
         tumor_tree(presence_file, tt, tumor_path)
         print("Clone, Tumor Phylo Tree vs Presence Matrix Plotted Successfully...")
 
-    if "CloneFinder" in processes and 'Picante_comdist' in processes and Go=='y':
-        print("\n----- Plotting Heatmap ------\n")
+    if "CloneFinder" in processes and 'Picante_comdist' in processes:
+        print("\n----- Plotting Treep ------\n")
         tt = os.path.join(
             target_dir, f"{input_file_base_name}_comdist_newick.txt")
 
@@ -766,8 +766,8 @@ def run_pipeline(args):
         tumor_tree(presence_file, tt, tumor_path)
         print("Clone, Tumor Phylo Tree vs Presence Matrix Plotted Successfully...")
 
-    if "CloneFinder" in processes and 'Picante_comdistnt' in processes and Go=='y':
-        print("\n----- Plotting Heatmap ------\n")
+    if "CloneFinder" in processes and 'Picante_comdistnt' in processes:
+        print("\n----- Plotting Tree ------\n")
         tt = os.path.join(
             target_dir, f"{input_file_base_name}_comdistnt_newick.txt")
 
@@ -775,8 +775,8 @@ def run_pipeline(args):
         tumor_tree(presence_file, tt, tumor_path)
         print("Clone, Tumor Phylo Tree vs Presence Matrix Plotted Successfully...")
 
-    if "CloneFinder" in processes and 'Picante_unifrac' in processes and Go=='y':
-        print("\n----- Plotting Heatmap ------\n")
+    if "CloneFinder" in processes and 'Picante_unifrac' in processes:
+        print("\n----- Plotting Tree ------\n")
         tt = os.path.join(
             target_dir, f"{input_file_base_name}_unifrac_newick.txt")
 
@@ -847,8 +847,8 @@ def move_files(src, target, dst):
            
             shutil.move(file, dst)
 
-    except Exception as e: pass
-     #   print(f"Error moving '{target}' files from '{src}' to '{dst}': {e}")
+    except Exception as e: #pass
+        print(f"Error moving '{target}' files from '{src}' to '{dst}': {e}")
 def delete_folder(folder_path):
     try:
         shutil.rmtree(folder_path)
@@ -894,6 +894,8 @@ if __name__ == "__main__":
 
     print ('collect output files')
     OutDir=args.input_file+'_output'
+    if os.path.exists(OutDir)==True:
+        delete_folder(OutDir)
     #delete_folder(OutDir)
     try:
         os.makedirs(OutDir, exist_ok=True)
@@ -915,7 +917,9 @@ if __name__ == "__main__":
     OutF.close()
   #  print ('collect output files')
     move_folder(args.target_dir+'\\'+DataID+'_PSF-SAMPLE-PhyloSignare', OutDir1+'\\'+DataID+'_PhyloSignare')   
-    move_files(OutDir+'\\'+DataID+'_clonevpresence.png', '', OutDir1+'\\'+DataID+'_CloneTree.png')   
+  #  print (OutDir+'\\'+DataID+'_clonevpresence.png', OutDir1+'\\'+DataID+'_CloneTree.png')
+    move_files(OutDir+'\\'+DataID+'_clonevpresence.png', '', OutDir1+'\\'+DataID+'_CloneTree.png')  
+   # open('a','r').readlines()    
     move_files(OutDir+'\\Phylo_bar_final.png', '', OutDir1+'\\'+DataID+'_Mutation.png')    
     move_files(OutDir+'\\'+DataID+'snv_PathFinder_processed_migration.png', '', OutDir1+'\\'+DataID+'_Metastasis.png')    
    # print (OutDir+'\\'+DataID+'_unifrac.nwk')
