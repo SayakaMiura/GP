@@ -925,6 +925,8 @@ if __name__ == "__main__":
    # print (OutDir+'\\'+DataID+'_unifrac.nwk')
     move_files(OutDir+'\\'+DataID+'_unifrac_newick.txt', '', OutDir1+'\\'+DataID+'_SampleTree_unifrac.nwk') 
     move_files(OutDir+'\\'+DataID+'_comdistnt_newick.txt', '', OutDir1+'\\'+DataID+'_SampleTree_comdistntW.nwk')
+    move_files(OutDir+'\\'+DataID+'_unifrac_weighted.pdf', '', OutDir1+'\\'+DataID+'_SampleTree_unifrac.pdf') 
+    move_files(OutDir+'\\'+DataID+'_comdistnt_weighted.pdf', '', OutDir1+'\\'+DataID+'_SampleTree_comdistntW.pdf')    
     os.remove(OutDir1+'\\'+DataID+'.nwk')  
     os.remove(OutDir1+'\\'+DataID+'_NodeSeq.meg')         
     os.remove(OutDir1+'\\'+DataID+'snv_summary.txt')  
