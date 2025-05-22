@@ -742,9 +742,9 @@ def run_pipeline(args):
     if 'All' in processes :
         print("\n----- Plotting Tree ------\n")
         tt = os.path.join(
-            target_dir, f"{input_file_base_name}_comdistnt_newick.txt")
+            target_dir, f"{input_file_base_name}_unifrac_newick.txt")
 
-        clone_tree(presence_file, ct, clone_path)
+        clone_tree(presence_file, ct, clone_path,tt)
         tumor_tree(presence_file, tt, tumor_path)
         print("Clone, Tumor Phylo Tree vs Presence Matrix Plotted Successfully...")
 
@@ -753,7 +753,7 @@ def run_pipeline(args):
         tt = os.path.join(
             target_dir, f"{input_file_base_name}_comdistnt_newick.txt")
 
-        clone_tree(presence_file, ct, clone_path)
+        clone_tree(presence_file, ct, clone_path,tt)
         tumor_tree(presence_file, tt, tumor_path)
         print("Clone, Tumor Phylo Tree vs Presence Matrix Plotted Successfully...")
 
@@ -762,7 +762,7 @@ def run_pipeline(args):
         tt = os.path.join(
             target_dir, f"{input_file_base_name}_comdist_newick.txt")
 
-        clone_tree(presence_file, ct, clone_path)
+        clone_tree(presence_file, ct, clone_path,tt)
         tumor_tree(presence_file, tt, tumor_path)
         print("Clone, Tumor Phylo Tree vs Presence Matrix Plotted Successfully...")
 
@@ -771,7 +771,7 @@ def run_pipeline(args):
         tt = os.path.join(
             target_dir, f"{input_file_base_name}_comdistnt_newick.txt")
 
-        clone_tree(presence_file, ct, clone_path)
+        clone_tree(presence_file, ct, clone_path,tt)
         tumor_tree(presence_file, tt, tumor_path)
         print("Clone, Tumor Phylo Tree vs Presence Matrix Plotted Successfully...")
 
@@ -780,7 +780,7 @@ def run_pipeline(args):
         tt = os.path.join(
             target_dir, f"{input_file_base_name}_unifrac_newick.txt")
 
-        clone_tree(presence_file, ct, clone_path)
+        clone_tree(presence_file, ct, clone_path,tt)
         tumor_tree(presence_file, tt, tumor_path)
         print("Clone, Tumor Phylo Tree vs Presence Matrix Plotted Successfully...")
     return ComLs
