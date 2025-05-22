@@ -30,25 +30,22 @@ python GP.py --driver_mutation_file [path to gp5_driver.txt]\gp5_driver.txt snv 
 
 **Input files**
 
-_1.	Driver mutation._ E.g., gp5_driver.txt. Please list gene name (Diver Gene) and chromosomal position (Mutation Summary) for each driver mutation.
+_1.	Driver mutation._ E.g., gp5_driver.txt. Please list gene name (Diver Gene) and chromosomal position (Mutation Summary) for each driver mutation. The first column is the driver gene ID. The second column is the mutation, with the format of [wild type]>[mutant type]. The last column is chromosomal position, which the format of [chromosome ID]:[Chromosomal position]. The chromosomal position needs to match to that listed in the Read Count input file (see below). The columns should be separated by tab.
    
-Driver Gene	ref>alt	Mutation Summary
+|Driver Gene | ref>alt | Mutation Summary|
+|----------|----------|----------|
+|HNF1A | G>T | chr12:120993588|
+|BRCA2 | ->A | chr13:32338208|
+|BRCA2 | ->A | chr13:32338209|
 
-HNF1A	G>T	chr12:120993588
+_2.	Read counts._ E.g., GP5_CF_input.tsv. Please list chromosome (CHR), genomic position (Position), reference base (Wild), alternate base (Mutant), trinucleotide of the genomic position (Trinucletide), and reference and alternate read count of each sample (e.g., S1:ref and S1:alt for S1 sample) for each SNV. The minimum number of samples is four. The columns should be separated by tab.
 
-BRCA2	->A	chr13:32338208
+|CHR| Position|Wild| Mutant|Trinucletide|	S1:ref|	S1:alt|S2:ref|	S2:alt|	S3:ref|	S3:alt|	S4:ref| 	S4:alt|
+|---|----------|---|-------|-------------|-----|---------|------|-------|--------|--------|--------|---------|
+|chr1|950995|C |T	| ACG|	101|	2	|69|	0	|78|	0	|99|	0|	
+|chr1|1128714|	C|	T|	ACG|	64|	29|	50|	23|	59|	20|	78|	38|	
 
-BRCA2	->A	chr13:32338209
-
-_2.	Read counts._ E.g., GP5_CF_input.tsv. Please list chromosome (CHR), genomic position (Position), reference base (Wild), alternate base (Mutant), trinucleotide of the genomic position (Trinucletide), and reference and alternate read count of each sample (e.g., S1:ref and S1:alt for S1 sample) for each SNV. The minimum number of samples is four. 
-
-CHR	Position	Wild	Mutant	Trinucletide	S1:ref	S1:alt	S2:ref	S2:alt	S3:ref	S3:alt	S4:ref 	S4:alt	
-
-chr1	950995	C	T	ACG	101	2	69	0	78	0	99	0	
-
-chr1	1128714	C	T	ACG	64	29	50	23	59	20	78	38	
-
-_3.	Expected mutational signatures._ E.g., control.txt. Please change only the line of “Signature List.”
+_3.	Expected mutational signatures._ E.g., control.txt. Please change only the line of “Signature List.” Signature IDs should be listed by separating by comma. Please edit the control.txt file. 
 
 …
 
