@@ -42,7 +42,7 @@ def clone_tree(presence, tree_file,clone_path,samp_tree):
             val_face = TextFace(f"{p:.3f}", fgcolor=val_color)
             val_face.margin_bottom = 5
             val_face.margin_top = 5
-            val_face.margin_right = 10
+            val_face.margin_right = 80
 
             leaf.add_face(val_face, column=i, position="aligned")
             i += 1
